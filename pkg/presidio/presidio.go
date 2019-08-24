@@ -19,6 +19,7 @@ const (
 	scheduleStreamsJob     = "schedule-streams-job"
 )
 
+// AllowedActions all of the allowed action that Presidio is offering
 var AllowedActions = []string{analyze, anonymize, scan, stream, datasink, scheduleScannerCronJob, scheduleStreamsJob}
 
 //ServicesAPI interface for services action
