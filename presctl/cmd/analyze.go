@@ -24,7 +24,7 @@ var analyzeCmd = &cobra.Command{
 		projectName := getFlagValue(cmd, projectFlag)
 		queryStr := getFlagValue(cmd, stringFlag)
 
-		// currently there is no way to define a 'group' if required params in cobra
+		// currently there is no way to define a 'group' of required params in cobra
 		if path == "" && (queryStr == "" || analyzeTemplateID == "") {
 			fmt.Printf("must supply the '%s' flag or the '%s' and '%s' flags", fileFlag, stringFlag, analyzeTemplateIDFlag)
 			os.Exit(1)

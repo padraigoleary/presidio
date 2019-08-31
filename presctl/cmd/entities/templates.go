@@ -95,20 +95,10 @@ func templateRestCommand(httpClient httpClient, op restOp, projectName string, a
 	}
 	check(err)
 
-	client := httpClient
-	response, err := client.Do(req)
+	response, err := httpClient.Do(req)
 	check(err)
 
-	var expectedStatusCode int
-	if op == create {
-		expectedStatusCode = http.StatusCreated
-	} else if op == delete {
-		expectedStatusCode = http.StatusNoContent
-	} else {
-		expectedStatusCode = http.StatusOK
-	}
-
-	if response.StatusCode != expectedStatusCode {
+	if response.StatusCode >= 300 {
 		errMsg := fmt.Sprintf("Operation failed. Returned status code: %d",
 			response.StatusCode)
 		fmt.Println(errMsg)
@@ -116,7 +106,7 @@ func templateRestCommand(httpClient httpClient, op restOp, projectName string, a
 	}
 
 	if op != get {
-		fmt.Printf("Success")
+		fmt.Println("Success")
 		return
 	}
 
@@ -128,7 +118,7 @@ func templateRestCommand(httpClient httpClient, op restOp, projectName string, a
 		prettyPrintJSON(unquotedStr)
 	}
 
-	fmt.Printf("Success")
+	fmt.Println("Success")
 }
 
 // CreateTemplate creates a new template

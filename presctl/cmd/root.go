@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"strings"
 
@@ -66,8 +65,8 @@ func getJSONFileContent(path string) (string, error) {
 func getFlagValue(cmd *cobra.Command, flagName string) string {
 	result, err := cmd.Flags().GetString(flagName)
 	if err != nil {
-		log.Printf("Failed getting '%s' flag", flagName)
-		panic(err)
+		fmt.Printf("Failed getting '%s' flag", flagName)
+		os.Exit(1)
 	}
 
 	return result

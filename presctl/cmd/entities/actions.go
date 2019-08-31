@@ -34,8 +34,7 @@ func restCommand(httpClient httpClient, url string, contentStr string) *http.Res
 	check(err)
 	req.Header.Set("Content-Type", "application/json")
 
-	client := httpClient
-	response, err := client.Do(req)
+	response, err := httpClient.Do(req)
 	check(err)
 
 	return response
@@ -53,7 +52,7 @@ func actionRestCommand(httpClient httpClient, action string, contentStr string, 
 		action)
 	response := restCommand(httpClient, url, contentStr)
 
-	if response.StatusCode != http.StatusOK {
+	if response.StatusCode >= 300 {
 		errMsg := fmt.Sprintf("Operation failed. Returned status code: %d", response.StatusCode)
 		fmt.Println(errMsg)
 		os.Exit(1)
