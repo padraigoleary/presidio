@@ -6,6 +6,7 @@ variables:
   MASTER_BRANCH_LABEL: latest # tag name of master branch
   DEV_BRANCH_LABEL: latest-dev # tag name of development branch
   DEFAULT_DEPS_LABEL: latest-dev
+  POOL_NAME: 'CSE'
 
 trigger: # CI triggers	
   batch: false 
@@ -42,7 +43,7 @@ jobs:
   timeoutInMinutes: 90  
   condition: eq(variables['Build.SourceBranchName'], 'master')
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: $(POOL_NAME)
   steps:  
   - template: templates/presidio-build-template.yaml  # Template reference
     parameters:
@@ -53,7 +54,7 @@ jobs:
   timeoutInMinutes: 90  
   condition: eq(variables['Build.SourceBranchName'], 'development')
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: $(POOL_NAME)
   steps:  
   - template: templates/presidio-build-template.yaml  # Template reference
     parameters:
@@ -64,7 +65,7 @@ jobs:
   timeoutInMinutes: 90  
   condition: and(ne(variables['Build.SourceBranchName'], 'development'), ne(variables['Build.SourceBranchName'], 'master'))
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: $(POOL_NAME)
   steps:  
   - template: templates/presidio-build-template.yaml  # Template reference
     parameters:

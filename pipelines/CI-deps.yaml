@@ -5,6 +5,7 @@ variables:
   GOROOT: '/usr/local/go1.11'
   MASTER_BRANCH_LABEL: latest # tag name of master branch
   DEV_BRANCH_LABEL: latest-dev # tag name of development branch
+  POOL_NAME: 'CSE'
 
 trigger: 
   batch: true 
@@ -44,7 +45,7 @@ stages:
       - job: BuildGolangDeps
         timeoutInMinutes: 15  # how long to run the job before automatically cancelling	
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: $(POOL_NAME)
         steps:        
         - task: Docker@2
           displayName: 'Build and Push Golang dependencies'
@@ -61,7 +62,7 @@ stages:
       - job: BuildPytonDeps
         timeoutInMinutes: 90  
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: $(POOL_NAME)
         steps:        
         - task: Docker@2
           displayName: 'Build and Push Python dependencies'
@@ -79,7 +80,7 @@ stages:
       - job:  BuildAndPushPresidio
         timeoutInMinutes: 90  
         pool:
-          vmImage: 'ubuntu-latest'
+          vmImage: $(POOL_NAME)
         steps:  
         - template: templates/presidio-build-template.yaml  # Template reference
           parameters:
