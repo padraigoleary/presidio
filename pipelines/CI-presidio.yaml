@@ -43,7 +43,7 @@ jobs:
   timeoutInMinutes: 90  
   condition: eq(variables['Build.SourceBranchName'], 'master')
   pool:
-    vmImage: $(POOL_NAME)
+    name: $(POOL_NAME)
   steps:  
   - template: templates/presidio-build-template.yaml  # Template reference
     parameters:
@@ -54,7 +54,7 @@ jobs:
   timeoutInMinutes: 90  
   condition: eq(variables['Build.SourceBranchName'], 'development')
   pool:
-    vmImage: $(POOL_NAME)
+    name: $(POOL_NAME)
   steps:  
   - template: templates/presidio-build-template.yaml  # Template reference
     parameters:
@@ -65,7 +65,7 @@ jobs:
   timeoutInMinutes: 90  
   condition: and(ne(variables['Build.SourceBranchName'], 'development'), ne(variables['Build.SourceBranchName'], 'master'))
   pool:
-    vmImage: $(POOL_NAME)
+    name: $(POOL_NAME)
   steps:  
   - template: templates/presidio-build-template.yaml  # Template reference
     parameters:
