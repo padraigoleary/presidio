@@ -44,8 +44,7 @@ stages:
 
       - job: BuildGolangDeps
         timeoutInMinutes: 15  # how long to run the job before automatically cancelling	
-        pool:
-          name: $(POOL_NAME)
+        pool: $(POOL_NAME)
         steps:        
         - task: Docker@2
           displayName: 'Build and Push Golang dependencies'
@@ -61,8 +60,7 @@ stages:
 
       - job: BuildPytonDeps
         timeoutInMinutes: 90  
-        pool:
-          name: $(POOL_NAME)
+        pool: $(POOL_NAME)
         steps:        
         - task: Docker@2
           displayName: 'Build and Push Python dependencies'
@@ -79,8 +77,7 @@ stages:
     jobs:
       - job:  BuildAndPushPresidio
         timeoutInMinutes: 90  
-        pool:
-          name: $(POOL_NAME)
+        pool: $(POOL_NAME)
         steps:  
         - template: templates/presidio-build-template.yaml  # Template reference
           parameters:
